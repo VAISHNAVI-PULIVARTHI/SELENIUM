@@ -1,0 +1,35 @@
+package frameworks;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class links {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+		ChromeDriver d=new ChromeDriver();
+		d.get("https://demo.guru99.com/test/newtours/");
+		d.manage().window().maximize();
+		FileInputStream f1=new FileInputStream("C:\\Users\\vaish\\eclipse-workspace\\excelshhets\\src\\frameworks\\p1.properties");
+		Properties p1=new Properties();
+		p1.load(f1);
+		d.findElement(By.name("userName")).sendKeys(p1.getProperty("username"));
+		d.findElement(By.name("password")).sendKeys(p1.getProperty("password"));
+		d.findElement(By.name("submit")).submit();
+		d.findElement(By.linkText("REGISTER")).click();
+	}
+
+}
